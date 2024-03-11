@@ -13,6 +13,7 @@ const {
 
 //Setting up Lodash and the Data to pull into my Graph (2)
 const _ = require('lodash');
+const mongoose = require('mongoose');
 
 const tasks = [
   { id: '1', title: 'Create your first webpage', weight: 1, description: 'Create your first HTML file 0-index.html with: -Add the doctype on the first line (without any comment) -After the doctype, open and close a html tag Open your file in your browser (the page should be blank)' },
