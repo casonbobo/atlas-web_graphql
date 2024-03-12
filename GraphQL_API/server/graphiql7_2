@@ -1,0 +1,11 @@
+mutation {
+  addProject(
+      title: "Reboot styling",
+      weight: 2,
+      description: "Add Bootstrap to reset the CSS stylinig."
+  ) {
+      title
+      weight
+      description
+  }
+}
