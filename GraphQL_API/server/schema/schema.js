@@ -12,17 +12,18 @@ const {
   GraphQLList
 } = require('graphql');
 
-//Setting up Lodash and the Data to pull into my Graph (2)
-const _ = require('lodash');
-const mongoose = require('mongoose'); //(6)
-const Project = require('../models/project'); //(7)
-const Task = require('../models/task');
+// Removing per task 8
+// //Setting up Lodash and the Data to pull into my Graph (2)
+// const _ = require('lodash');
+// const mongoose = require('mongoose'); //(6)
+// const Project = require('../models/project'); //(7)
+// const Task = require('../models/task');
 
 
-const tasks = [
-  { id: '1', title: 'Create your first webpage', weight: 1, description: 'Create your first HTML file 0-index.html with: -Add the doctype on the first line (without any comment) -After the doctype, open and close a html tag Open your file in your browser (the page should be blank)' },
-  { id: '2', title: 'Structure your webpage', weight: 1, description: 'Copy the content of 0-index.html into 1-index.html Create the head and body sections inside the html tag, create the head and body tags (empty) in this order' },
-];
+// const tasks = [
+//   { id: '1', title: 'Create your first webpage', weight: 1, description: 'Create your first HTML file 0-index.html with: -Add the doctype on the first line (without any comment) -After the doctype, open and close a html tag Open your file in your browser (the page should be blank)' },
+//   { id: '2', title: 'Structure your webpage', weight: 1, description: 'Copy the content of 0-index.html into 1-index.html Create the head and body sections inside the html tag, create the head and body tags (empty) in this order' },
+// ];
 
 //projects
 const projects = [
@@ -83,26 +84,26 @@ const RootQuery = new GraphQLObjectType({
       type: TaskType,
       args: { id: { type: GraphQLString } },
       resolve(parent, args) {
-        return _.filter(tasks, {id: args.id });
+        return Task.findByID(args.id);
       },
     },
     project: {
       type: ProjectType,
       args: { id: { type: GraphQLString } },
       resolve(parent, args) {
-        return _.find(projects, {id: args.id });
+        return Project.findByID(args.id);
       },
     },
     tasks: {
       type: new GraphQLList(TaskType),
       resolve(parent, args) {
-        return tasks;
+        return Task.find({});
       },
     },
     projects: {
       type: new GraphQLList(ProjectType),
       resolve(parent, args) {
-        return projects;
+        return projects.find({});
       }
     }
   }
